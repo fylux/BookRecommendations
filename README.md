@@ -8,6 +8,7 @@ The goal of this project is to provide book recommendations in an useful way. Fo
 
 
 ## Recomendation System
+The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common link between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain)
 
 
 ## Web Application
@@ -19,7 +20,11 @@ The server uses the model that previously already trained for the recommendation
 Due to the unstructured and informal structure of much of the information in Wikipedia, a significant part of the application is devoted to making it more fault tolerant and exploring alternatives ways of finding missing information. For instance, something so simple as the year of a book might be missing in the infobox of an article, encoded in a different format or even contain comments that are only visible in the source code. Similar and bigger issues arise and basically every piece of information.
 
 ### Perfomance Enhancements
+It is common to serve information related with the a book that was previously checked. Based on this idea, the server implements a caching system so that missing information of a given book does not need to be fetched twice if the same book is served again, what results in big performance improvements in particular when doing things such as page reloading or exploring related books.
+
 Relying on Wikpedia's API is often slow, what makes hard to offer a fluid experience to the user. However, sometimes it is very important to use it, in particular when some information is missing. For that purpose, the system has been developed in such a way that for the main book that is being checked it spend a fair amount of time searching for information, while for book recommendations and other books it follows a best effort approach, were books whose related information cannot be retrieved quickly are discarded in order to offer a fluent experience.
+
+Finally, the images of the webpage are loaded asynchronously in order to offer a more fluid experience.
 
 ## Technologies
 This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML and CSS. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
