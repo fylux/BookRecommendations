@@ -8,7 +8,11 @@ The goal of this project is to provide book recommendations in an useful way. Fo
 
 
 ## Recomendation System
-The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common link between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain)
+The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common wikilinks between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain).
+
+### Entity Embeddings
+In order to be able to make recommendations, we want to map each book to a position in a vector space, where books that are near in the space correspond to books that are similar. For that purpose, we will build a low dimensional learned representation of the data. This way, instead of having a one-hot encoding with as many dimensions as books, we will map them to a new dimension where distance has meaning.
+To build the embeddings we use a Neural Network. Although there are plenty of resources about how to approach such task, the idea is to train a Neural Network to predict if a link will appear in a book, and finally the weights of the network will correspond to the embeddings.
 
 
 ## Web Application
