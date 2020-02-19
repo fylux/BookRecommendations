@@ -5,15 +5,16 @@ The goal of this project is to provide book recommendations in an useful way. Fo
  - Exposing book related information in a web application.
  
 ## Book Scraping
-
+To gather all the data about books in Wikipedia we rely on [dumps](https://dumps.wikimedia.org/enwiki/20200201/) which are basically backups of Wikipedia that are done monthly and that contain all the articles that exist.
+The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large (~50GB compressed), it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
 
 ## Recomendation System
 The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common wikilinks between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain).
 
 ### Entity Embeddings
 In order to be able to make recommendations, we want to map each book to a position in a vector space, where books that are near in the space correspond to books that are similar. For that purpose, we will build a low dimensional learned representation of the data. This way, instead of having a one-hot encoding with as many dimensions as books, we will map them to a new dimension where distance has meaning.
-To build the embeddings we use a Neural Network. Although there are plenty of resources about how to approach such task, the idea is to train a Neural Network to predict if a link will appear in a book, and finally the weights of the network will correspond to the embeddings.
-
+To build the embeddings we use a Neural Network. Although there are plenty of resources about how to approach such task, the idea is to train the network with thousands of examples of pairs (link,book) and it will try to predict if such link appears in a given book.. Finally the weights of the network will correspond to the embeddings.
+Once that we have a representation of books as embeddings, we normalize so that the dot product between two embeddings becomes the cosine similarity. Hence, in order to find similar books we can just find the books with the most cosine similarity.
 
 ## Web Application
 The web application is based on a Flask server that serves the web content, do all the book related processing, and calls the recommendation system to make use of the recommendations in the web.
@@ -31,12 +32,13 @@ Relying on Wikpedia's API is often slow, what makes hard to offer a fluid experi
 Finally, the images of the webpage are loaded asynchronously in order to offer a more fluid experience.
 
 ## Technologies
-This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML and CSS. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
+This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML, CSS and JavaScript. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
 
 ## Code Structure
+The system is composed of several programs. The program "fetch_wikipedia_books.py" corresponds to the processing of Wikipedia's Dump and generated a JSON file with all the books. Secondly, the program "generate_embeddings.py" uses the previously generated JSON file to generate a dataset of pairs of links and articles and uses them to train a Neural Network and finally generate the embeddings. Finally, the web application is contained in the folder "webapp". Such folder, on the one hand has all the HTML, CSS and JS used for the web. And on the other hand it contains the sever app in "app.py" which initially loads in memory information about books and the embeddings, and then it uses such information in combination with many other functions to serve the data that the user requests.
 
-## Deployment
+### Deployment
+The deployment is simple considering the previous explanation about code structure. First run "fetch_wikipedia_books.py" to generate the JSON file, then "generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
 
-<!--
-A minimal documentation (README file) should be provided to explain thegoal of the project, the structure of the code, the dependencies, and how to deploy and run thesystem
--->
+### Dependencies
+In order to execute the system is it necessary to have Python 3.6+ and the packages listed at the beggining of each script .
