@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B00KOSKI</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="../static/js/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/js/owlcarousel/owl.theme.default.min.css">
+
+</head>
+<body>
+
+<div class="navbar">
+    <div class="container-navbar">
+    
+        <div class="navbar__logo">B00KOSKI</div>
+
+        <div class="navbar__search">
+            <input type="text" name="search" placeholder="Search..">
+        </div>
+
+    </div>
+</div>
+
+<div class="main">
+
+    <div class="book-main">
+    
+        <div class="book-main__text">
+            <div class="book-main__text__title">
+                <h3>{{author}}</h3>
+            </div>
+            <div class="book-main__text__description">
+                {{summary}}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="book-timeline">
+    
+    <div class="container-max">
+        <div class="book-timeline__title">Books from {{author}}</div>
+    </div>
+
+    <div class="book-timeline__scroll">
+
+    <div class="owl-carousel">
+        {% for b in books%}
+        <div class="book-timeline--book">
+            <a href="/book/{{b['name']}}">
+            <div class="book-timeline--book__image"><img src="{{b['url']}}" loading="lazy"></div>
+            <div class="book-timeline--book__title">{{b['name']}}</div>
+            </a>
+        </div>
+        {% endfor %}
+    </div><!--/owl-carousel-->
+
+    </div><!--/book-timeline__scroll-->
+
+</div>
+
+
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/owlcarousel/owl.carousel.min.js"></script>
+
+<script src="../static/js/index.js"></script>
+
+
+</body>
+</html>
