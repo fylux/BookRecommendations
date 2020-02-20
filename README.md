@@ -6,7 +6,7 @@ The goal of this project is to provide book recommendations in an useful way. Fo
  
 ## Book Scraping
 To gather all the data about books in Wikipedia we rely on [dumps](https://dumps.wikimedia.org/enwiki/20200201/) which are basically backups of Wikipedia that are done monthly and that contain all the articles that exist.
-The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large (~50GB compressed), it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
+The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large, it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
 
 ## Recomendation System
 The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common wikilinks between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain).
@@ -38,7 +38,7 @@ This project is mostly based on Python, in particular for all the aspects relate
 The system is composed of several programs. The program "fetch_wikipedia_books.py" corresponds to the processing of Wikipedia's Dump and generated a JSON file with all the books. Secondly, the program "generate_embeddings.py" uses the previously generated JSON file to generate a dataset of pairs of links and articles and uses them to train a Neural Network and finally generate the embeddings. Finally, the web application is contained in the folder "webapp". Such folder, on the one hand has all the HTML, CSS and JS used for the web. And on the other hand it contains the sever app in "app.py" which initially loads in memory information about books and the embeddings, and then it uses such information in combination with many other functions to serve the data that the user requests.
 
 ### Deployment
-The deployment is simple considering the previous explanation about code structure. First run "fetch_wikipedia_books.py" to generate the JSON file, then "generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
+The deployment is simple considering the previous explanation about code structure. First run "fetch_books/fetch_books.py" to generate the JSON file, then "embeddings/generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
 
 ### Dependencies
 In order to execute the system is it necessary to have Python 3.6+ and the packages listed at the beggining of each script .
