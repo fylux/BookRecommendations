@@ -6,7 +6,7 @@ The goal of this project is to provide book recommendations in an useful way. Fo
  
 ## Book Scraping
 To gather all the data about books in Wikipedia we rely on [dumps](https://dumps.wikimedia.org/enwiki/20200201/) which are basically backups of Wikipedia that are done monthly and that contain all the articles that exist.
-The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large (~50GB compressed), it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
+The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large, it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
 
 ## Recomendation System
 The recommendation system used is based on the hypothesis that a good way of determining the similarity between books is considering the common wikilinks between their corresponding Wikipedia article. Such idea has proven to be sucessful (e.g. [here](http://www.aaai.org/Papers/Workshops/2008/WS-08-15/WS08-15-005.pdf)) and has been used as the foundations for state of the art tools for semantic related algorithms, such as [WikiBrain](http://shilad.github.io/wikibrain).
