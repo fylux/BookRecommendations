@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="../static/js/owlcarousel/owl.carousel.min.css">
     <link rel="stylesheet" href="../static/js/owlcarousel/owl.theme.default.min.css">
-
 </head>
 <body>
 
@@ -23,7 +22,7 @@
         <div class="navbar__logo">B00KOSKI</div>
 
         <div class="navbar__search">
-            <input type="text" name="search" placeholder="Search..">
+            <input type="text" name="search" id="search_bar" placeholder="Search..">
         </div>
 
     </div>
@@ -45,7 +44,7 @@
                 <span>Author</span>
                 <a href="/author/{{author}}">{{author}}</a>
             </div>
-            {% if year != "" %}
+            {% if year != "-1" %}
             <div class="book-main__text__year">
                 <span>Year</span>
                 {{year}}
@@ -91,6 +90,15 @@
 
 <script src="../static/js/index.js"></script>
 
+<script type="text/javascript">
+	document.getElementById("search_bar").addEventListener("keyup", function(event) {
+	    event.preventDefault();
+	    if (event.keyCode === 13) {
+	        bookSearched = document.getElementById("search_bar").value;
+	    	window.location.replace("/book/"+bookSearched)
+	    }
+	});
+</script>
 
 </body>
 </html>
