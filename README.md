@@ -31,6 +31,13 @@ Relying on Wikpedia's API is often slow, what makes hard to offer a fluid experi
 
 Finally, the images of the webpage are loaded asynchronously in order to offer a more fluid experience.
 
+## Plugin
+In addition to the described functionalities, an experimental web plugin has been developed in order to be able to access to the web through Wikipedia. At this stage of development it can be run through Greasemonkey in Firefox. The associated code is in the folder "/plugin".
+
+<p align="center">
+<img src="https://i.imgur.com/xwmDq4N.png" width="75%">
+</p>
+
 ## Technologies
 This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML, CSS and JavaScript. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
 
@@ -38,7 +45,7 @@ This project is mostly based on Python, in particular for all the aspects relate
 The system is composed of several programs. The program "fetch_wikipedia_books.py" corresponds to the processing of Wikipedia's Dump and generated a JSON file with all the books. Secondly, the program "generate_embeddings.py" uses the previously generated JSON file to generate a dataset of pairs of links and articles and uses them to train a Neural Network and finally generate the embeddings. Finally, the web application is contained in the folder "webapp". Such folder, on the one hand has all the HTML, CSS and JS used for the web. And on the other hand it contains the sever app in "app.py" which initially loads in memory information about books and the embeddings, and then it uses such information in combination with many other functions to serve the data that the user requests.
 
 ### Deployment
-The deployment is simple considering the previous explanation about code structure. First run "fetch_books/fetch_books.py" to generate the JSON file, then "embeddings/generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
+The deployment is simple considering the previous explanation about code structure. First run "/fetch_books/fetch_books.py" to generate the JSON file, then "/embeddings/generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
 
 ### Dependencies
 In order to execute the system is it necessary to have Python 3.6+ and the packages listed at the beggining of each script .
