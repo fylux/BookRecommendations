@@ -1,4 +1,6 @@
 # Book Recommendations
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ 
 The goal of this project is to provide book recommendations in an useful way. For that purpose, the recommendations are integrated in a web application allowing users to explore books and authors, taking advantage of recommendations as well as by enhancing the information about the books with information extracted from Wikimedia. The project is composed of three main parts.
  - Scraping and grouping information about books.
  - Training of a Neural Network for book recommendations.
