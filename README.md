@@ -48,4 +48,13 @@ The system is composed of several programs. The program "fetch_wikipedia_books.p
 The deployment is simple considering the previous explanation about code structure. First run "/fetch_books/fetch_books.py" to generate the JSON file, then "/embeddings/generate_embeddings.py" and finally "app.py" to run the application. However, since the two initial steps should only be done once and they are very time consuming, in order to deploy the page is enough to simply run "app.py", unless that the dataset of books is updated.
 
 ### Dependencies
-In order to execute the system is it necessary to have Python 3.6+ and the packages listed at the beggining of each script .
+In order to execute the system is it necessary to have Python 3.6+ and the following packages:
+ - bs4
+ - flask
+ - flask_ngrok
+ - keras
+ - mwparserfromhell
+ - numpy
+ - wikipedia
+ - wptools
+ - xml.sax
