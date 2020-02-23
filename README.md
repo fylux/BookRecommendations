@@ -4,6 +4,9 @@ The goal of this project is to provide book recommendations in an useful way. Fo
  - Training of a Neural Network for book recommendations.
  - Exposing book related information in a web application.
  
+### Technologies
+This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML, CSS and JavaScript. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
+ 
 ## Book Scraping
 To gather all the data about books in Wikipedia we rely on [dumps](https://dumps.wikimedia.org/enwiki/20200201/) which are basically backups of Wikipedia that are done monthly and that contain all the articles that exist.
 The system analyses the dumps searching for articles that correspond to books, for that purpose it search for the existance of the "Infobox Book" template that is common among all book articles. Nonetheless, since the amount of data that is has to process is so large, it can take around 10 hours to finish. The final result is a JSON file containing all the information corresponding of each book article.
@@ -37,9 +40,6 @@ In addition to the described functionalities, an experimental web plugin has bee
 <p align="center">
 <img src="https://i.imgur.com/xwmDq4N.png" width="75%">
 </p>
-
-## Technologies
-This project is mostly based on Python, in particular for all the aspects related scraping and machine learning. However, the web application makes use of specific web technologies such as HTML, CSS and JavaScript. Regarding the libraries that have been used, for scraping relies mostly on [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) together with some parsing utilies. The recommendation system is built using [Keras](https://github.com/keras-team/keras) and [Tensorflow](https://github.com/tensorflow/tensorflow). Finally, the web server is based on [Flask](https://github.com/pallets/flask).
 
 ## Code Structure
 The system is composed of several programs. The program "fetch_wikipedia_books.py" corresponds to the processing of Wikipedia's Dump and generated a JSON file with all the books. Secondly, the program "generate_embeddings.py" uses the previously generated JSON file to generate a dataset of pairs of links and articles and uses them to train a Neural Network and finally generate the embeddings. Finally, the web application is contained in the folder "webapp". Such folder, on the one hand has all the HTML, CSS and JS used for the web. And on the other hand it contains the sever app in "app.py" which initially loads in memory information about books and the embeddings, and then it uses such information in combination with many other functions to serve the data that the user requests.
