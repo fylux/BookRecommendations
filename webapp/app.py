@@ -26,7 +26,7 @@ wikipedia.set_lang("en")
 
 books = []
 
-with urllib.request.urlopen('https://github.com/fylux/BookRecommendations/blob/master/data/books.ndjson?raw=true') as fin:
+#with urllib.request.urlopen('https://github.com/fylux/BookRecommendations/blob/master/data/books.ndjson?raw=true') as fin:
 with open("../data/books.ndjson") as fin:
     books = [json.loads(l) for l in fin]
 
